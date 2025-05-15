@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Bienvenido al Panel de Gestión</h1>
+
+  <div class="alert alert-info" role="alert">
+    ¡Bienvenido! Tienes acceso completo al panel de administración. Gestiona tus usuarios, reservas y pistas de manera eficiente.
+  </div>
+
+  <div class="row g-4 text-center">
+    <!-- Usuarios registrados -->
+    <div class="col-md-4">
+      <div class="card border-primary">
+        <div class="card-body">
+          <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png" alt="Usuarios" class="mb-3" style="width: 80px;">
+          <h5 class="card-title">Usuarios registrados</h5>
+          <p class="card-text display-6">{{ usuariosRegistrados }}</p>
+          <button class="btn btn-primary">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservas hoy -->
+    <div class="col-md-4">
+      <div class="card border-success">
+        <div class="card-body">
+          <img src="https://img.icons8.com/ios-filled/100/008000/booking.png" alt="Reservas" class="mb-3" style="width: 80px;">
+          <h5 class="card-title">Reservas de hoy</h5>
+          <p class="card-text display-6">{{ reservasHoy }}</p>
+          <button class="btn btn-success">Ver reservas</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pistas disponibles -->
+    <div class="col-md-4">
+      <div class="card border-warning">
+        <div class="card-body">
+          <img src="https://img.icons8.com/ios-filled/100/FFA500/tennis.png" alt="Pistas" class="mb-3" style="width: 80px;">
+          <h5 class="card-title">Pistas disponibles</h5>
+          <p class="card-text display-6">{{ pistasDisponibles }}</p>
+          <button class="btn btn-warning">Administrar pistas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

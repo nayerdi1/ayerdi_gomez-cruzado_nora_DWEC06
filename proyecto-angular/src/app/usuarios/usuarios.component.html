@@ -1,0 +1,59 @@
+
+  <!-- Contenido principal -->
+  <div class="container mt-5">
+    <h1 class="mb-4">Gestión de Usuarios</h1>
+
+    <!-- Buscador -->
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Buscar usuario por nombre o email">
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Fecha de registro</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of listaUsuarios">
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellido }}</td>
+            <td>{{ usuario.edad }}</td>
+            <td>{{ usuario.fecha_registro.toISOString().split('T')[0] }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2">Editar</button>
+              <button class="btn btn-sm btn-danger">Eliminar</button>
+            </td>
+          </tr>
+          <!-- Más usuarios aquí -->
+        </tbody>
+      </table>
+      <!-- Paginación -->
+<nav aria-label="Paginación de usuarios" class="mt-3">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled" [class.disabled]="paginaActual === 1">
+      <a class="page-link" (click)="cambiarPagina(paginaActual - 1)">Anterior</a>
+    </li>
+    <li class="page-item" [class.active]="paginaActual === 1">
+        <a class="page-link"  (click)="cambiarPagina(1)">1</a>
+    </li>
+    <li class="page-item" [class.active]="paginaActual === 2">
+        <a class="page-link"  (click)="cambiarPagina(2)">2</a>
+    </li>
+    <li class="page-item" [class.active]="paginaActual === 3">
+        <a class="page-link" (click)="cambiarPagina(3)">3</a></li>
+    <li class="page-item" [class.disabled]="paginaActual === 3">
+      <a class="page-link" (click)="cambiarPagina(paginaActual + 1)">Siguiente</a>
+    </li>
+  </ul>
+</nav>
+    </div>
+  </div>

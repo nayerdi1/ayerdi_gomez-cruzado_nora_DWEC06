@@ -1,0 +1,79 @@
+
+  <!-- Contenido principal -->
+  <div class="container mt-5">
+    <h1 class="mb-4">Gestión de Reservas</h1>
+
+    <!-- Buscador -->
+    <div class="mb-3">
+      <button class="btn btn-sm btn-success" (click)="agregarReserva()" type="button">Añadir reserva</button>
+    </div>
+
+    <!-- Tabla de reservas -->
+    <div *ngIf="!mostrarReserva" class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary">
+          <tr>
+            <th>Usuario</th>
+            <th>Instalación</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let reserva of listaReservas">
+            <td>{{reserva.nombre}} {{reserva.apellido}}</td>
+            <td>{{reserva.pista}}</td>
+            <td>{{reserva.fecha}}</td>
+            <td>{{reserva.hora}}</td>
+            <td><span class="badge bg-success">Confirmada</span></td>
+            <td>
+              <button class="btn btn-sm btn-info me-2" (click) = "verReserva(reserva)">Ver</button>
+              <button class="btn btn-sm btn-warning me-2" (click)="editarReserva(reserva)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="borrarReserva(reserva)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div *ngIf="mostrarReserva" class="card p-4 shadow">
+      <h3 class="mb-3">Detalles de la Reserva</h3>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" [(ngModel)]="reservaSelec.nombre" name="nombre" [disabled]="!modoEdicion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Apellido</label>
+          <input type="text" class="form-control" [(ngModel)]="reservaSelec.apellido" name="apellido" [disabled]="!modoEdicion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" [(ngModel)]="reservaSelec.email" name="email" [disabled]="!modoEdicion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Instalación</label>
+          <input type="text" class="form-control" [(ngModel)]="reservaSelec.pista" name="pista" [disabled]="!modoEdicion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Fecha</label>
+          <input type="date" class="form-control" [(ngModel)]="reservaSelec.fecha" name="fecha" [disabled]="!modoEdicion">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Hora</label>
+          <input type="text" class="form-control" [(ngModel)]="reservaSelec.hora" name="hora" [disabled]="!modoEdicion">
+        </div>
+        <button class="btn btn-sm" (click)="volverLista()" type="button">Volver</button>
+        <button class="btn btn-sm btn-warning me-2" (click)="editarReserva()" type="button" *ngIf="!modoEdicion">Editar</button>
+        <button class="btn btn-sm btn-danger" (click)="borrarReserva()" type="button" *ngIf="!modoEdicion">Borrar</button>
+        <button class="btn btn-sm btn-danger" (click)="guardarCambios()" type="button" *ngIf="modoEdicion">Guardar cambios</button>
+
+      </form>
+    </div>
+    <div>
+      <canvas id="reservasPorDiaChart" width="400" height="200"></canvas>
+    </div>
+  </div>
