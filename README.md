@@ -1,7 +1,8 @@
 1.- Clonar el repositorio:
 
-git clone https://github.com/tu-usuario/nombre-del-repositorio.git
-cd nombre-del-repositorio
+git clone https://github.com/nayerdi1/ayerdi_gomez-cruzado_nora_DWEC06.git
+
+cd proyecto-angular
 
 2.- Instalar las dependencias del proyecto:
 
