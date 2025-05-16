@@ -7,6 +7,7 @@ cd proyecto-angular
 2.- Instalar las dependencias del proyecto:
 
 npm install
+
 Esto descargará todas las librerías definidas en package.json.
 
 3.- Levantar el servidor de desarrollo:
