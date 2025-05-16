@@ -3,12 +3,12 @@
   <div class="container mt-5">
     <h1 class="mb-4">Gestión de Reservas</h1>
 
-    <!-- Buscador -->
+    <!-- Botón para añadir nueva reserva -->
     <div class="mb-3">
       <button class="btn btn-sm btn-success" (click)="agregarReserva()" type="button">Añadir reserva</button>
     </div>
 
-    <!-- Tabla de reservas -->
+     <!-- Tabla de reservas: solo se muestra si NO se está viendo una reserva individual -->
     <div *ngIf="!mostrarReserva" class="table-responsive">
       <table class="table table-bordered table-hover align-middle">
         <thead class="table-primary">
@@ -22,6 +22,7 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Recorre la lista de reservas y muestra cada una en una fila -->
           <tr  *ngFor="let reserva of listaReservas">
             <td>{{reserva.nombre}} {{reserva.apellido}}</td>
             <td>{{reserva.pista}}</td>
@@ -29,6 +30,7 @@
             <td>{{reserva.hora}}</td>
             <td><span class="badge bg-success">Confirmada</span></td>
             <td>
+              <!-- Botones de acción: ver, editar, eliminar -->
               <button class="btn btn-sm btn-info me-2" (click) = "verReserva(reserva)">Ver</button>
               <button class="btn btn-sm btn-warning me-2" (click)="editarReserva(reserva)">Editar</button>
               <button class="btn btn-sm btn-danger" (click)="borrarReserva(reserva)">Eliminar</button>
@@ -38,9 +40,10 @@
       </table>
     </div>
 
-
+    <!-- Vista detallada de una reserva (formulario): solo se muestra si mostrarReserva es true -->
     <div *ngIf="mostrarReserva" class="card p-4 shadow">
       <h3 class="mb-3">Detalles de la Reserva</h3>
+      <!-- Formulario para ver o editar los datos de una reserva -->
       <form>
         <div class="mb-3">
           <label class="form-label">Nombre</label>
@@ -70,9 +73,9 @@
         <button class="btn btn-sm btn-warning me-2" (click)="editarReserva()" type="button" *ngIf="!modoEdicion">Editar</button>
         <button class="btn btn-sm btn-danger" (click)="borrarReserva()" type="button" *ngIf="!modoEdicion">Borrar</button>
         <button class="btn btn-sm btn-danger" (click)="guardarCambios()" type="button" *ngIf="modoEdicion">Guardar cambios</button>
-
       </form>
     </div>
+    <!-- Gráfico de reservas por día -->
     <div>
       <canvas id="reservasPorDiaChart" width="400" height="200"></canvas>
     </div>

@@ -21,6 +21,7 @@
             <th>Acciones</th>
           </tr>
         </thead>
+        <!-- Cuerpo de la tabla: recorre la lista de usuarios -->
         <tbody>
           <tr *ngFor="let usuario of listaUsuarios">
             <td>{{ usuario.nombre }}</td>
@@ -28,32 +29,32 @@
             <td>{{ usuario.edad }}</td>
             <td>{{ usuario.fecha_registro.toISOString().split('T')[0] }}</td>
             <td>{{ usuario.email }}</td>
+            <!-- Botones de acción por cada usuario -->
             <td>
               <button class="btn btn-sm btn-warning me-2">Editar</button>
               <button class="btn btn-sm btn-danger">Eliminar</button>
             </td>
           </tr>
-          <!-- Más usuarios aquí -->
         </tbody>
       </table>
-      <!-- Paginación -->
-<nav aria-label="Paginación de usuarios" class="mt-3">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled" [class.disabled]="paginaActual === 1">
-      <a class="page-link" (click)="cambiarPagina(paginaActual - 1)">Anterior</a>
-    </li>
-    <li class="page-item" [class.active]="paginaActual === 1">
-        <a class="page-link"  (click)="cambiarPagina(1)">1</a>
-    </li>
-    <li class="page-item" [class.active]="paginaActual === 2">
-        <a class="page-link"  (click)="cambiarPagina(2)">2</a>
-    </li>
-    <li class="page-item" [class.active]="paginaActual === 3">
-        <a class="page-link" (click)="cambiarPagina(3)">3</a></li>
-    <li class="page-item" [class.disabled]="paginaActual === 3">
-      <a class="page-link" (click)="cambiarPagina(paginaActual + 1)">Siguiente</a>
-    </li>
-  </ul>
-</nav>
+      <!-- Navegación por páginas (paginación) -->
+      <nav aria-label="Paginación de usuarios" class="mt-3">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled" [class.disabled]="paginaActual === 1">
+            <a class="page-link" (click)="cambiarPagina(paginaActual - 1)">Anterior</a>
+          </li>
+          <li class="page-item" [class.active]="paginaActual === 1">
+              <a class="page-link"  (click)="cambiarPagina(1)">1</a>
+          </li>
+          <li class="page-item" [class.active]="paginaActual === 2">
+              <a class="page-link"  (click)="cambiarPagina(2)">2</a>
+          </li>
+          <li class="page-item" [class.active]="paginaActual === 3">
+              <a class="page-link" (click)="cambiarPagina(3)">3</a></li>
+          <li class="page-item" [class.disabled]="paginaActual === 3">
+            <a class="page-link" (click)="cambiarPagina(paginaActual + 1)">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>

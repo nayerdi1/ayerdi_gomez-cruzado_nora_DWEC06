@@ -10,7 +10,7 @@ import Chart from 'chart.js/auto'; // Importa Chart.js
   styleUrl: './reservas.component.css'
 })
 export class ReservasComponent implements OnInit{
-  // Array con los datos recibidos de la API sin procesar
+ 
   public reservasEncontradas : Array<any> = [];
   public listaReservas : Array<Reserva> = [];
   public reservaSelec : Reserva = new Reserva(0, "", "", "", 0, new Date(), "");
@@ -23,6 +23,7 @@ export class ReservasComponent implements OnInit{
 
   // Se ejecuta al iniciar el componente: carga todas las reservas
   ngOnInit(): void {
+    // Obtiene todas las reservas del backend
       this._reservasService.getReservas().subscribe({
         next: respuesta => {
             this.reservasEncontradas = respuesta; // Aquí ya tienes los datos reales
@@ -36,7 +37,7 @@ export class ReservasComponent implements OnInit{
       })
   }
 
-  // Recorre el array de datos recibidos y crea objetos Reserva que añade a listaReservas
+  // Transforma los datos recibidos en objetos de tipo Reserva
   guardarReservas(){
     for (let reserva of this.reservasEncontradas){
       this.listaReservas.push(new Reserva(reserva.id, reserva.nombre, reserva.apellido, 
@@ -64,7 +65,7 @@ export class ReservasComponent implements OnInit{
     this.modoEdicion = true;
   }
 
-  // Prepara el componente para editar una reserva existente
+  // Prepara el formulario para editar una reserva existente
   editarReserva(reserva? : Reserva) {
     this.cambios = 'update';
     if(reserva == null){
@@ -89,7 +90,7 @@ export class ReservasComponent implements OnInit{
         next: () => {
           alert('La reserva ha sido eliminada correctamente.');
 
-          // Actualiza la lista local eliminando la reserva borrada
+          // Elimina la reserva localmente de la lista
           this.listaReservas = this.listaReservas.filter(r => r.id !== reserva!.id);
 
           this.mostrarReserva = false;
@@ -160,14 +161,16 @@ export class ReservasComponent implements OnInit{
     }
   }
 
+  // Valida los datos antes de guardar una reserva
   validarReserva(): boolean {
   const { nombre, apellido, pista, fecha, hora, id } = this.reservaSelec;
 
+  // Validación de campos obligatorios
   if (!nombre.trim() || !apellido.trim()) {
     alert("El nombre y el apellido no pueden estar vacíos.");
     return false;
   }
-
+  // Validación de rango de pista
   if (pista < 1 || pista > 10) {
     alert("La pista debe estar entre el 1 y el 10.");
     return false;
@@ -177,7 +180,7 @@ export class ReservasComponent implements OnInit{
   console.log("Pista:", pista);
   console.log("Fecha:", fecha);
   console.log("Hora:", hora);
-  
+  // Verifica si hay conflicto (misma pista, fecha y hora)
   const conflicto = this.listaReservas.find(r => {
     const fecha1 = new Date(r.fecha);
     const fecha2 = new Date(fecha);
@@ -216,12 +219,13 @@ export class ReservasComponent implements OnInit{
         contadorFechas[fechaStr] = 1;
       }
     }
-    // Devuelve las fechas y los conteos en arrays ordenados
+    // Ordena las fechas cronológicamente
     const fechas = Object.keys(contadorFechas).sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
     const conteos = fechas.map(fecha => contadorFechas[fecha]);
 
     return { fechas, conteos };
   }
+  
   // Después de guardar reservas, crea el gráfico
   crearGraficoReservasPorDia() {
     const { fechas, conteos } = this.getReservasPorDia();
